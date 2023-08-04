@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
@@ -7,11 +6,11 @@ import 'package:flutix/bloc/blocs.dart';
 import 'package:flutix/services/services.dart';
 import 'package:flutix/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../shared/shared.dart';
 import 'package:flutix/extensions/extensions.dart';
@@ -25,3 +24,4 @@ part 'new_movies_page.dart';
 part 'signup_page.dart';
 part 'preference_page.dart';
 part 'account_confirm_page.dart';
+part 'detail_movie_page.dart';

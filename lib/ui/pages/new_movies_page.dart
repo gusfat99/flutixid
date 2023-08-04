@@ -5,9 +5,8 @@ class NewMoviesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ThemeBloc>().add(ChangeTheme(themeData: ThemeData(fontFamily: GoogleFonts
-        .raleway()
-        .fontFamily)));
+    context.read<ThemeBloc>().add(ChangeTheme(
+        themeData: ThemeData(fontFamily: GoogleFonts.raleway().fontFamily)));
 
     return ListView(
       children: [
@@ -15,11 +14,13 @@ class NewMoviesPage extends StatelessWidget {
           builder: (context, userState) {
             if ((userState is UserLoaded)) {
               return Container(
-                padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 30),
+                padding: const EdgeInsets.only(
+                    top: 20, left: 24, right: 24, bottom: 30),
                 decoration: const BoxDecoration(
                   color: mainColor,
-                  borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20.0),
+                      bottomRight: Radius.circular(20.0)),
                 ),
                 child: Row(
                   children: [
@@ -41,24 +42,29 @@ class NewMoviesPage extends StatelessWidget {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 image: userState?.user?.profilePicture == ""
-                                    ? const AssetImage("assets/user_pic.png") as ImageProvider
-                                    : NetworkImage(userState!.user.profilePicture),
+                                    ? const AssetImage("assets/user_pic.png")
+                                        as ImageProvider
+                                    : NetworkImage(
+                                        userState!.user.profilePicture),
                                 fit: BoxFit.cover)),
                       ),
-                      // child: userState?.user?.profilePicture != '' ? Image.network(userState.user.profilePicture, width: 50, height: 50, fit: BoxFit.cover, ) :  Image.asset('assets/user_pic.png', width: 50, height: 50,),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           userState.user.name,
-                          style: whiteTextFont.copyWith(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),
+                          style: whiteTextFont.copyWith(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
                           height: 4.0,
                         ),
                         Text(
-                          Utilities.toCurrency(userState.user.balance, 0, 'IDR '),
+                          Utilities.toCurrency(
+                              userState.user.balance, 0, 'IDR '),
                           style: yellowNumberFont.copyWith(fontSize: 14),
                         ),
                       ],
@@ -71,13 +77,14 @@ class NewMoviesPage extends StatelessWidget {
           },
         ),
         Container(
-          margin: const EdgeInsets.only(top: 30.0),
+          margin: const EdgeInsets.only(top: 30.0, bottom: 88.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Move On Playing Section
               Container(
-                margin: const EdgeInsets.only(left: defaultMargin, bottom: 30.0),
+                margin:
+                    const EdgeInsets.only(left: defaultMargin, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -90,17 +97,30 @@ class NewMoviesPage extends StatelessWidget {
                       child: BlocBuilder<MovieBloc, MovieState>(
                         builder: (context, movieState) {
                           if (movieState is MovieOnPlayingLoaded) {
-                            return ListView.builder(scrollDirection: Axis.horizontal,
+                            return ListView.builder(
+                                scrollDirection: Axis.horizontal,
                                 itemCount: movieState.movies.length,
                                 itemBuilder: (_, index) {
                                   return MovieCardPlaying(
-                                    margin: EdgeInsets.only(right: 16.0), movie: movieState.movies[index],);
+                                    margin: const EdgeInsets.only(right: 16.0),
+                                    movie: movieState.movies[index],
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, '/movie-detail', arguments: {
+                                        'id': movieState.movies[index].id
+                                      });
+                                    },
+                                  );
                                 });
                           } else {
                             return ListView.builder(
-                                scrollDirection: Axis.horizontal, itemCount: 3, itemBuilder: (_, index) {
-                              return const MovieCardPlayingSkeleton(margin: EdgeInsets.only(right: 16.0),);
-                            });
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 3,
+                                itemBuilder: (_, index) {
+                                  return const MovieCardPlayingSkeleton(
+                                    margin: EdgeInsets.only(right: 16.0),
+                                  );
+                                });
                           }
                         },
                       ),
@@ -120,16 +140,21 @@ class NewMoviesPage extends StatelessWidget {
                     ),
                     BlocBuilder<UserBloc, UserState>(
                       builder: (context, userState) {
-                        if(userState is UserLoaded) {
-                          print(userState.user.selectedGenres);
+                        if (userState is UserLoaded) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(userState.user.selectedGenres.length, (index) => BrowseButton(genre: userState.user.selectedGenres[index],)),
+                            children: List.generate(
+                                userState.user.selectedGenres.length,
+                                (index) => BrowseButton(
+                                      genre:
+                                          userState.user.selectedGenres[index],
+                                    )),
                           );
                         } else {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(4, (index) => const BrowseButtonSkeleton()),
+                            children: List.generate(
+                                4, (index) => const BrowseButtonSkeleton()),
                           );
                         }
                       },
@@ -137,35 +162,56 @@ class NewMoviesPage extends StatelessWidget {
                   ],
                 ),
               ),
-              //Coming soon
+              //Coming soon Section
               Container(
-                margin: const EdgeInsets.symmetric( vertical: 30.0),
+                margin: const EdgeInsets.symmetric(vertical: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(left: defaultMargin, bottom: 12.0),
-                      child :titleSection('Coming Soon'),
+                      margin: const EdgeInsets.only(
+                          left: defaultMargin, bottom: 12.0),
+                      child: titleSection('Coming Soon'),
                     ),
                     SizedBox(
                       height: 140,
-                      child:  ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (_, index) {
-                          return Container(
-                            height: 140,
-                            width: 100,
-                            margin: const EdgeInsets.only(right: 16.0),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color : greyColor
-                            ),
-                          );
+                      child: BlocBuilder<MovieComingBloc, MovieComingState>(
+                        builder: (context, movieState) {
+                          bool isLoaded = movieState is MovieComingSoonLoaded;
+                          return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  isLoaded ? movieState.movies.length : 5,
+                              itemBuilder: (_, index) => MovieCardComingSoon(
+                                    movie: (isLoaded
+                                        ? movieState.movies[index]
+                                        : null),
+                                    isLoading: !isLoaded,
+                                  ));
                         },
                       ),
                     ),
-
+                  ],
+                ),
+              ),
+              //Discount Section
+              Container(
+                margin: const EdgeInsets.all(defaultMargin),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    titleSection('Get Lucky Day'),
+                    const SizedBox(
+                      height: 13.0,
+                    ),
+                    ...dummyPromos.map((el) {
+                      int idx = dummyPromos.indexOf(el);
+                      return PromoCard(
+                          promo: el,
+                          margin: EdgeInsets.only(
+                              bottom:
+                                  idx == dummyPromos.length - 1 ? 0 : 16.0));
+                    }).toList(),
                   ],
                 ),
               ),

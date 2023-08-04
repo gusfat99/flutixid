@@ -5,9 +5,17 @@ class RatingStarts extends StatelessWidget {
   final double iconSize;
   final double fontSize;
   final Color starColor;
+  final TextStyle? textStyle;
+  final MainAxisAlignment? mainAxisAlignment;
 
   const RatingStarts(
-      {super.key, required this.averageRate, this.iconSize = 20.0, this.fontSize = 12.0, this.starColor = yellowColor });
+      {super.key,
+      required this.averageRate,
+      this.iconSize = 20.0,
+      this.fontSize = 12.0,
+      this.textStyle,
+      this.mainAxisAlignment,
+      this.starColor = yellowColor});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +32,14 @@ class RatingStarts extends StatelessWidget {
       width: 3,
     ));
     starsWidget.add(Text(
-      '$averageRate/10',
-      style: whiteNumberFont.copyWith(fontSize: fontSize, fontWeight: FontWeight.w300),
+      '${averageRate.round()}/10',
+      style: textStyle ??
+          whiteNumberFont.copyWith(
+              fontSize: fontSize, fontWeight: FontWeight.w300),
     ));
 
     return Row(
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       children: starsWidget.toList(),
     );
   }

@@ -30,19 +30,27 @@ class MyApp extends StatelessWidget {
           BlocProvider<UserBloc>(create: (BuildContext context) => UserBloc()),
           BlocProvider<ThemeBloc>(
               create: (BuildContext context) => ThemeBloc()),
-          BlocProvider<MovieBloc>(create: (BuildContext context) => MovieBloc())
+          BlocProvider<MovieBloc>(
+            create: (BuildContext context) => MovieBloc(),
+          ),
+          BlocProvider<MovieComingBloc>(
+            create: (BuildContext context) => MovieComingBloc(),
+          )
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {
-            context.read<MovieBloc>().add(
-              FetchMoviesOnPlaying()
-            );
+            context.read<MovieBloc>().add(FetchMoviesOnPlaying());
+            context.read<MovieComingBloc>().add(FetchMoviesComingSoon());
+
             return MaterialApp(
               theme: themeState.themeData,
               debugShowCheckedModeBanner: false,
-              home: const Scaffold(
-                body: Wrapper(),
-              ),
+              routes: {
+                '/': (context) => const Scaffold(
+                      body: Wrapper(),
+                    ),
+                '/movie-detail': (context) => const DetailMoviePage(),
+              },
             );
           },
         ),

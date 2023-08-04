@@ -27,5 +27,6 @@ TextStyle dangerTextFont = GoogleFonts.raleway()
 
 TextStyle whiteNumberFont =
     GoogleFonts.openSans().copyWith(color: Colors.white);
+TextStyle greyNumberFont = GoogleFonts.openSans().copyWith(color: greyColor);
 TextStyle yellowNumberFont =
     GoogleFonts.openSans().copyWith(color: yellowColor);

@@ -4,7 +4,7 @@ abstract class MovieState extends Equatable {
   const MovieState();
 }
 
-class MovieOnPlayingInitial extends MovieState {
+class MovieInitial extends MovieState {
   @override
   List<Object> get props => [];
 }
@@ -17,3 +17,4 @@ class MovieOnPlayingLoaded extends MovieState {
   @override
   List<Object> get props => [movies];
 }
+

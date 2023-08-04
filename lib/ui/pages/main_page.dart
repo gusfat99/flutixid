@@ -29,7 +29,6 @@ class _MainPageState extends State<MainPage> {
     )));
     
     return Scaffold(
-      // backgroundColor: const Color(0xFFF6F7F9),
       body: Stack(
         children: [
           Container(
@@ -85,7 +84,7 @@ class _MainPageState extends State<MainPage> {
           child: Container(
             height: 65.0,
             decoration: BoxDecoration(
-              color: dangerColor,
+              color: mainLightColor,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0)),
             ),
             child: BottomNavigationBar(
@@ -94,7 +93,7 @@ class _MainPageState extends State<MainPage> {
               selectedItemColor: Colors.black,
               unselectedItemColor: greyColor,
               currentIndex: currentIndexBottomNavBar,
-              selectedLabelStyle: TextStyle(
+              selectedLabelStyle: const TextStyle(
                 fontSize: 11.0,
                 fontWeight: FontWeight.w600,
               ),
@@ -107,11 +106,11 @@ class _MainPageState extends State<MainPage> {
               items: [
                 BottomNavigationBarItem(
                   label: "New Movies",
-                  icon: Container( margin: EdgeInsets.only(bottom: 6.0), child: Image.asset(currentIndexBottomNavBar == 0 ? 'assets/ic_movie.png' : 'assets/ic_movie_grey.png', width: 24.0,)),
+                  icon: Container( margin: const EdgeInsets.only(bottom: 6.0), child: Image.asset(currentIndexBottomNavBar == 0 ? 'assets/ic_movie.png' : 'assets/ic_movie_grey.png', width: 24.0,)),
                 ),
                 BottomNavigationBarItem(
                   label: "My Tickets",
-                  icon: Container( margin: EdgeInsets.only(bottom: 6.0), child: Image.asset(currentIndexBottomNavBar == 1 ?  'assets/ic_tickets.png' : 'assets/ic_tickets_grey.png', width: 24.0,)),
+                  icon: Container( margin: const EdgeInsets.only(bottom: 6.0), child: Image.asset(currentIndexBottomNavBar == 1 ?  'assets/ic_tickets.png' : 'assets/ic_tickets_grey.png', width: 24.0,)),
                 ),
               ],
             ),

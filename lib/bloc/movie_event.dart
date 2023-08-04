@@ -8,8 +8,3 @@ class FetchMoviesOnPlaying extends MovieEvent {
   @override
   List<Object> get props => [];
 }
-
-class FetchMoviesComingSoon  extends MovieEvent {
-  @override
-  List<Object> get props => [];
-}
