@@ -8,3 +8,6 @@ part 'movie.dart';
 part 'dummy_promos.dart';
 part 'movie_detail.dart';
 part 'credit.dart';
+part 'theater.dart';
+part 'tickets.dart';
+part 'flutix_transaction.dart';

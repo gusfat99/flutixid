@@ -184,7 +184,7 @@ class _SignupPageState extends State<SignupPage> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           width: 50,
                           child: FloatingActionButton(

@@ -13,18 +13,6 @@ class DetailMoviePage extends StatelessWidget {
     Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
     int movieId = arguments['id'];
 
-    // return Container(
-    //   child: FutureBuilder(
-    //       future: MovieService.getCreditMovie(movieId: movieId),
-    //       builder: (_, snapshot) {
-    //         // if(snapshot.connectionState == ConnectionState.done)
-    //         if (snapshot.hasData) {
-    //           print("snapshot data ${snapshot.data}");
-    //           print("movieId ${movieId.toString()}");
-    //         }
-    //         return Column();
-    //       }),
-    // );
     return Scaffold(
       body: Stack(
         children: [
@@ -210,7 +198,10 @@ class DetailMoviePage extends StatelessWidget {
                     child: ElevatedButton(
                       style:
                           ElevatedButton.styleFrom(backgroundColor: mainColor),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/ordering',
+                            arguments: {'movieDetail': movieDetail});
+                      },
                       child: Text(
                         "Continue to Book",
                         style: whiteTextFont.copyWith(fontSize: 16),

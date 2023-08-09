@@ -17,3 +17,11 @@ class UserLoaded extends UserState {
   @override
   List<Object> get props => [user];
 }
+
+class UserHasTopup extends UserState {
+  final int amount;
+  const UserHasTopup(this.amount);
+
+  @override
+  List<Object> get props => [amount];
+}

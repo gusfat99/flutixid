@@ -17,19 +17,31 @@ class TitleMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment:
+          mainAxisAlignment != null && mainAxisAlignment == 'start'
+              ? CrossAxisAlignment.start
+              : CrossAxisAlignment.center,
       mainAxisAlignment:
           mainAxisAlignment != null && mainAxisAlignment == 'start'
               ? MainAxisAlignment.start
               : MainAxisAlignment.center,
       children: [
-        Text(
-          title,
-          style: blackTextFont.copyWith(
-              fontSize:
-                  mainAxisAlignment != null && mainAxisAlignment == 'start'
-                      ? 18
-                      : 24,
-              fontWeight: FontWeight.w600),
+        SizedBox(
+          width: MediaQuery.of(context).size.width - (2 * defaultMargin) - 90,
+          child: Text(
+            title,
+            style: blackTextFont.copyWith(
+                fontSize:
+                    mainAxisAlignment != null && mainAxisAlignment == 'start'
+                        ? 16
+                        : 20,
+                fontWeight: FontWeight.w600),
+            maxLines: 3,
+            overflow: TextOverflow.clip,
+            textAlign: mainAxisAlignment != null && mainAxisAlignment == 'start'
+                ? TextAlign.left
+                : TextAlign.center,
+          ),
         ),
         const SizedBox(
           height: 6.0,
@@ -48,7 +60,10 @@ class TitleMovie extends StatelessWidget {
           averageRate: rate,
           textStyle: greyNumberFont.copyWith(
               fontSize: 12, fontWeight: FontWeight.w300),
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:
+              mainAxisAlignment != null && mainAxisAlignment == 'start'
+                  ? MainAxisAlignment.start
+                  : MainAxisAlignment.center,
         ),
       ],
     );

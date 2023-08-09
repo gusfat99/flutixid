@@ -18,6 +18,16 @@ class User extends Equatable {
         this.balance = 50000,
         this.selectedGenres = const [],
         this.selectedLanguage = 'id'});
+  
+  
+  User copyWith({String? name, String? profilePicture, int? balance}) => User(
+      id: id,
+      email: email,
+      name: name ?? this.name,
+      profilePicture: profilePicture ?? this.profilePicture,
+      balance: balance ?? this.balance,
+      selectedGenres: selectedGenres,
+      selectedLanguage: selectedLanguage);
 
   @override
   List<Object> get props => [

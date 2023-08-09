@@ -52,3 +52,4 @@ class onAccountConfirmPage extends PageState {
   @override
   List<Object> get props => [];
 }
+

@@ -3,3 +3,5 @@ import 'package:flutix/models/models.dart';
 
 part 'firebase_user_extension.dart';
 part 'form_validation_extension.dart';
+part 'datetime_extension.dart';
+part 'string_extension.dart';

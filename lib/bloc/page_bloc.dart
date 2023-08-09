@@ -8,7 +8,6 @@ part 'page_state.dart';
 class PageBloc extends Bloc<PageEvent, PageState> {
   PageBloc() : super(onInitialPage()) {
     on<PageEvent>((event, emit) {
-      print('what the event is ${event}');
       if (event is GoToSplashPage) {
         emit(onSplashPage());
       } else if (event is GoToLoginPage) {

@@ -4,6 +4,7 @@ import 'package:flutix/models/models.dart';
 import 'package:flutix/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shimmer/shimmer.dart';
 
 part 'input.dart';
@@ -23,3 +24,4 @@ part 'title_movie.dart';
 part 'title_movie_skeleton.dart';
 part 'cast_card.dart';
 part 'cast_card_skeleton.dart';
+part 'submit_button.dart';

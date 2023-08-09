@@ -1,21 +1,22 @@
 part of 'widgets.dart';
 
 class Input extends StatelessWidget {
-  const Input({
-    super.key,
-    this.focusedColor,
-    this.hint,
-    required this.label,
-    this.obscureText = false,
-    this.onChanged,
-    this.controller,
-    this.isPasswordType = false,
-    this.onTapVisibility,
-    this.helperText = null,
-    this.hasFocused = false,
-    this.focusNode = null,
-    this.validator
-  });
+  const Input(
+      {super.key,
+      this.focusedColor,
+      this.hint,
+      required this.label,
+      this.obscureText = false,
+      this.onChanged,
+      this.controller,
+      this.isPasswordType = false,
+      this.onTapVisibility,
+      this.helperText = null,
+      this.hasFocused = false,
+      this.focusNode = null,
+      this.validator,
+      this.labelStyle,
+      this.style});
 
   final Color? focusedColor;
   final String? hint;
@@ -29,49 +30,54 @@ class Input extends StatelessWidget {
   final bool hasFocused;
   final FocusNode? focusNode;
   final String? Function(String?)? validator;
-
+  final TextStyle? labelStyle;
+  final TextStyle? style;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: () {},
       focusNode: focusNode,
-      onChanged:onChanged,
+      onChanged: onChanged,
       autofocus: true,
       obscureText: obscureText,
       controller: controller,
       validator: validator,
+      style: style,
       decoration: InputDecoration(
+        labelStyle: labelStyle,
         helperText: helperText,
         helperStyle: dangerTextFont.copyWith(),
         labelText: label,
         hintText: hint,
+
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(width: 1,color: dangerColor),
+          borderSide: BorderSide(width: 1, color: dangerColor),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(width: 1,color: dangerColor),
+          borderSide: BorderSide(width: 1, color: dangerColor),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         // suffixIconColor: greyColor,
-        suffixIcon: isPasswordType ? GestureDetector(
-          onTap: onTapVisibility,
-          child: Align(
-            widthFactor: 1.0,
-            heightFactor: 1.0,
-            child: Align(
-              widthFactor: 1.0,
-              heightFactor: 1.0,
-              child: Icon(
-                obscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-            )
-          ),
-        ) : null,
+        suffixIcon: isPasswordType
+            ? GestureDetector(
+                onTap: onTapVisibility,
+                child: Align(
+                    widthFactor: 1.0,
+                    heightFactor: 1.0,
+                    child: Align(
+                      widthFactor: 1.0,
+                      heightFactor: 1.0,
+                      child: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
+                    )),
+              )
+            : null,
       ),
     );
   }

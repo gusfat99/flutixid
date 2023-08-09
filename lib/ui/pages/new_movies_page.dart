@@ -41,11 +41,11 @@ class NewMoviesPage extends StatelessWidget {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: userState?.user?.profilePicture == ""
+                                image: userState.user.profilePicture == ""
                                     ? const AssetImage("assets/user_pic.png")
                                         as ImageProvider
                                     : NetworkImage(
-                                        userState!.user.profilePicture),
+                                        userState.user.profilePicture),
                                 fit: BoxFit.cover)),
                       ),
                     ),
@@ -81,52 +81,55 @@ class NewMoviesPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Move On Playing Section
-              Container(
-                margin:
-                    const EdgeInsets.only(left: defaultMargin, bottom: 30.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleSection('Now Playing'),
-                    const SizedBox(
-                      height: 12,
+              //On Playing Section
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: defaultMargin, bottom: 12.0),
+                    child: titleSection('Now Playing'),
+                  ),
+                  SizedBox(
+                    height: 140,
+                    child: BlocBuilder<MovieBloc, MovieState>(
+                      builder: (context, movieState) {
+                        if (movieState is MovieOnPlayingLoaded) {
+                          return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: movieState.movies.length,
+                              itemBuilder: (_, index) {
+                                return MovieCardPlaying(
+                                  margin: EdgeInsets.only(
+                                      right: 16.0,
+                                      left: index == 0 ? defaultMargin : 0),
+                                  movie: movieState.movies[index],
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/movie-detail', arguments: {
+                                      'id': movieState.movies[index].id
+                                    });
+                                  },
+                                );
+                              });
+                        } else {
+                          return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (_, index) {
+                                return const MovieCardPlayingSkeleton(
+                                  margin: EdgeInsets.only(
+                                      right: 16.0, left: defaultMargin),
+                                );
+                              });
+                        }
+                      },
                     ),
-                    SizedBox(
-                      height: 140,
-                      child: BlocBuilder<MovieBloc, MovieState>(
-                        builder: (context, movieState) {
-                          if (movieState is MovieOnPlayingLoaded) {
-                            return ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: movieState.movies.length,
-                                itemBuilder: (_, index) {
-                                  return MovieCardPlaying(
-                                    margin: const EdgeInsets.only(right: 16.0),
-                                    movie: movieState.movies[index],
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, '/movie-detail', arguments: {
-                                        'id': movieState.movies[index].id
-                                      });
-                                    },
-                                  );
-                                });
-                          } else {
-                            return ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 3,
-                                itemBuilder: (_, index) {
-                                  return const MovieCardPlayingSkeleton(
-                                    margin: EdgeInsets.only(right: 16.0),
-                                  );
-                                });
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 30.0,
+                  ),
+                ],
               ),
               //Browse Movie Section
               Container(

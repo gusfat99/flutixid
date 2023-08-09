@@ -35,7 +35,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<MovieComingBloc>(
             create: (BuildContext context) => MovieComingBloc(),
-          )
+          ),
+          BlocProvider<OrderStepBloc>(
+              create: (BuildContext context) => OrderStepBloc())
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {
@@ -50,6 +52,11 @@ class MyApp extends StatelessWidget {
                       body: Wrapper(),
                     ),
                 '/movie-detail': (context) => const DetailMoviePage(),
+                '/ordering': (context) => const Scaffold(
+                      body: WrapperOrder(),
+                    ),
+                '/topup': (context) => const TopupPage(),
+                '/successfull': (context) => const SuccessfullPage()
               },
             );
           },
