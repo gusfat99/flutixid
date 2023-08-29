@@ -22,6 +22,8 @@ class CheckoutOrderPage extends StatelessWidget {
               User user = (userState as UserLoaded).user;
               int total = (fee + price) * ticket.seat.length;
 
+              ticket.copyWith(price: total);
+
               return ListView(
                 children: [
                   SizedBox(
@@ -126,8 +128,7 @@ class CheckoutOrderPage extends StatelessWidget {
                       ),
                       itemDesctiption(
                           'Total',
-                          Utilities.toCurrency(
-                              (fee + price) * ticket.seat.length, 0, 'IDR '),
+                          Utilities.toCurrency(total, 0, 'IDR '),
                           true,
                           blackNumberFont.copyWith(
                               fontSize: 16, fontWeight: FontWeight.w600)),
@@ -158,10 +159,24 @@ class CheckoutOrderPage extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 26),
                     child: ElevatedButton(
                       onPressed: () {
+                        var copyTicket = ticket.copyWith(price: total);
                         if (user.balance >= total) {
+                          FlutixTransaction transaction = FlutixTransaction(
+                              userID: user.id,
+                              title: ticket.movieDetail.title,
+                              subtitle: ticket.theater.name,
+                              time: DateTime.now(),
+                              amount: -total);
+
+                          Navigator.pushNamed(context, '/successfull',
+                              arguments: {
+                                'ticket': copyTicket,
+                                'type_transaction': 'purcash',
+                                'transaction': transaction,
+                              });
                         } else {
                           Navigator.pushNamed(context, '/topup',
-                              arguments: {'ticket': ticket});
+                              arguments: {'ticket': copyTicket});
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -205,7 +220,7 @@ class CheckoutOrderPage extends StatelessWidget {
         ),
         const SizedBox(width: 8.0),
         SizedBox(
-          width: 210.0,
+          width: 195.0,
           child: Text(
             value,
             textAlign: TextAlign.right,

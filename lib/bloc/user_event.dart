@@ -25,3 +25,11 @@ class UserTopup extends UserEvent {
   @override
   List<Object> get props => [amount];
 }
+
+class UserPurcash extends UserEvent {
+  final int amount;
+  const UserPurcash(this.amount);
+
+  @override
+  List<Object> get props => [amount];
+}

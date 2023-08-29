@@ -46,12 +46,21 @@ class TitleMovie extends StatelessWidget {
         const SizedBox(
           height: 6.0,
         ),
-        Text(
-          genreAndLanguage,
-          style: greyTextFont.copyWith(
-            fontSize: 12,
+        Container(
+          width: mainAxisAlignment == 'start'
+              ? MediaQuery.of(context).size.width - (2 * defaultMargin) - 90
+              : double.infinity,
+          child: Text(
+            genreAndLanguage,
+            style: greyTextFont.copyWith(
+              fontSize: 12,
+              overflow: TextOverflow.clip,
+            ),
+            maxLines: 3,
+            textAlign: mainAxisAlignment == 'start'
+                ? TextAlign.left
+                : TextAlign.center,
           ),
-          textAlign: TextAlign.center,
         ),
         const SizedBox(
           height: 6.0,

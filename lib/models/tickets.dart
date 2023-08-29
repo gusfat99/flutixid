@@ -6,6 +6,7 @@ class Ticket extends Equatable {
   final String bookingCode;
   final List<String> seat;
   final DateTime dateTime;
+  final String name;
   final int price;
 
   const Ticket(
@@ -14,6 +15,7 @@ class Ticket extends Equatable {
     this.bookingCode,
     this.seat,
     this.dateTime,
+    this.name,
     this.price,
   );
 
@@ -23,6 +25,7 @@ class Ticket extends Equatable {
           String? bookingCode,
           List<String>? seat,
           DateTime? dateTime,
+          String? name,
           int? price}) =>
       Ticket(
           movieDetail ?? this.movieDetail,
@@ -30,7 +33,8 @@ class Ticket extends Equatable {
           bookingCode ?? this.bookingCode,
           seat ?? this.seat,
           dateTime ?? this.dateTime,
-          this.price);
+          name ?? this.name,
+          price ?? this.price);
 
   String get seatsInString {
     return seat.join(",");
@@ -43,6 +47,7 @@ class Ticket extends Equatable {
         bookingCode,
         seat,
         dateTime,
+        name,
         price,
       ];
 }

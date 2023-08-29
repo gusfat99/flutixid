@@ -11,3 +11,4 @@ part 'auth_service.dart';
 part 'user_service.dart';
 part 'movie_service.dart';
 part 'trasaction_service.dart';
+part 'ticket_service.dart';

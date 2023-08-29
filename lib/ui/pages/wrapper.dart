@@ -11,7 +11,6 @@ class _WrapperState extends State<Wrapper> {
   @override
   Widget build(BuildContext context) {
     auth.User? firebaseUser = Provider.of<auth.User?>(context);
-
     if (firebaseUser == null) {
       if (!(prevPageEvent is GoToSplashPage)) {
         prevPageEvent = GoToSplashPage();
@@ -27,7 +26,6 @@ class _WrapperState extends State<Wrapper> {
     }
 
     return BlocBuilder<PageBloc, PageState>(builder: (context, pageState) {
-
       if (pageState is onMainPage) {
         return const MainPage();
       } else if (pageState is onLoginPage) {

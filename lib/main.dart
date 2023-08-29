@@ -1,5 +1,6 @@
 import 'package:flutix/bloc/blocs.dart';
 import 'package:flutix/bloc/movie_bloc.dart';
+import 'package:flutix/bloc/ticket_bloc.dart';
 import 'package:flutix/services/services.dart';
 import 'package:flutix/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
             create: (BuildContext context) => MovieComingBloc(),
           ),
           BlocProvider<OrderStepBloc>(
-              create: (BuildContext context) => OrderStepBloc())
+              create: (BuildContext context) => OrderStepBloc()),
+          BlocProvider<TicketBloc>(
+              create: (BuildContext context) => TicketBloc())
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {

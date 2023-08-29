@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutix/bloc/blocs.dart';
+import 'package:flutix/bloc/ticket_bloc.dart';
 import 'package:flutix/services/services.dart';
 import 'package:flutix/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';

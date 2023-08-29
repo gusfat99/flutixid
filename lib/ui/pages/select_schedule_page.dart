@@ -28,83 +28,90 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
     Map arguments = ModalRoute.of(context)?.settings.arguments as Map;
     MovieDetail movieDetail = arguments['movieDetail'];
 
-    return SafeArea(
-        child: ListView(
-      children: [
-        const SizedBox(
-          height: 36.0,
-        ),
-        Row(
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, userState) {
+
+        return SafeArea(
+            child: ListView(
           children: [
+            const SizedBox(
+              height: 36.0,
+            ),
+            Row(
+              children: [
+                Container(
+                  margin:
+                      const EdgeInsets.only(left: defaultMargin, bottom: 20.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(Icons.arrow_back, size: 24),
+                  ),
+                ),
+              ],
+            ),
             Container(
-              margin: const EdgeInsets.only(left: defaultMargin, bottom: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
+              margin: const EdgeInsets.only(left: defaultMargin, bottom: 16.0),
+              child: titleSection('Choose Date'),
+            ),
+            SizedBox(
+              height: 90,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 7,
+                itemBuilder: (BuildContext context, int index) {
+                  return SelectableBox(
+                      onTap: () {
+                        setState(() {
+                          selectedDate = dates[index];
+                          if (dates[index].day != DateTime.now().day) {
+                            selectedTime = null;
+                          }
+                        });
+                      },
+                      height: 90,
+                      width: 70,
+                      isSelected: dates[index].day == selectedDate.day,
+                      label:
+                          '${dates[index].shortDayName}\n${dates[index].day.toString()}',
+                      margin: EdgeInsets.only(
+                          right: index == 6 ? 0 : 16,
+                          left: index == 0 ? defaultMargin : 0));
                 },
-                child: const Icon(Icons.arrow_back, size: 24),
               ),
             ),
+            const SizedBox(
+              height: 24.0,
+            ),
+            generateDateTimeSchedule(),
+            const SizedBox(
+              height: 30.0,
+            ),
+            SubmitButton(
+              isDisabled: !isValid,
+              onPressed: () {
+                if (isValid) {
+                  context.read<OrderStepBloc>().add(GoToSeatOrder(Ticket(
+                      movieDetail,
+                      selectedTheater!,
+                      randomAlphaNumeric(12).toUpperCase(),
+                      [],
+                      DateTime(selectedDate.year, selectedDate.month,
+                          selectedDate.day, selectedTime!),
+                      (userState as UserLoaded).user.name,
+                      0)));
+                  // BlocProvider.of<OrderStepBloc>(context).add(GoToSeatOrder());
+                }
+              },
+            ),
+            const SizedBox(
+              height: 40.0,
+            ),
           ],
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: defaultMargin, bottom: 16.0),
-          child: titleSection('Choose Date'),
-        ),
-        SizedBox(
-          height: 90,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 7,
-            itemBuilder: (BuildContext context, int index) {
-              return SelectableBox(
-                  onTap: () {
-                    setState(() {
-                      selectedDate = dates[index];
-                      if (dates[index].day != DateTime.now().day) {
-                        selectedTime = null;
-                      }
-                    });
-                  },
-                  height: 90,
-                  width: 70,
-                  isSelected: dates[index].day == selectedDate.day,
-                  label:
-                      '${dates[index].shortDayName}\n${dates[index].day.toString()}',
-                  margin: EdgeInsets.only(
-                      right: index == 6 ? 0 : 16,
-                      left: index == 0 ? defaultMargin : 0));
-            },
-          ),
-        ),
-        const SizedBox(
-          height: 24.0,
-        ),
-        generateDateTimeSchedule(),
-        const SizedBox(
-          height: 30.0,
-        ),
-        SubmitButton(
-          isDisabled: !isValid,
-          onPressed: () {
-            if (isValid) {
-              context.read<OrderStepBloc>().add(GoToSeatOrder(Ticket(
-                  movieDetail,
-                  selectedTheater!,
-                  randomAlphaNumeric(12).toUpperCase(),
-                  [],
-                  DateTime(selectedDate.year, selectedDate.month,
-                      selectedDate.day, selectedTime!),
-                  0)));
-              // BlocProvider.of<OrderStepBloc>(context).add(GoToSeatOrder());
-            }
-          },
-        ),
-        const SizedBox(
-          height: 40.0,
-        ),
-      ],
-    ));
+        ));
+      },
+    );
   }
 
   Widget titleSection(title) {
