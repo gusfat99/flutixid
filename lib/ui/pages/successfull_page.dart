@@ -111,8 +111,7 @@ class SuccessfullPage extends StatelessWidget {
   }
 
   Future<void> processingTicketOrder(context, transaction, ticket) async {
-    print("ticket");
-    print(ticket);
+   
     BlocProvider.of<UserBloc>(context).add(UserPurcash(transaction.amount));
     BlocProvider.of<TicketBloc>(context)
         .add(BuyTicket(ticket, transaction.userID));
