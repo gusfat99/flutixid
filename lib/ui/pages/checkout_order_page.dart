@@ -90,65 +90,81 @@ class CheckoutOrderPage extends StatelessWidget {
                       )),
                   Column(
                     children: [
-                      itemDesctiption(
-                          'ID Order', ticket.bookingCode, true, null),
+                      ItemDescription(
+                        label: 'ID Order',
+                        value: ticket.bookingCode,
+                        isNumeric: true,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption(
-                          'Cinema', ticket.theater.name, false, null),
+                      ItemDescription(
+                        label: 'Cinema',
+                        value: ticket.theater.name,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption('Date & Time',
-                          ticket.dateTime.dateAndTime, true, null),
+                      ItemDescription(
+                        label: 'Date & Time',
+                        value: ticket.dateTime.dateAndTime,
+                        isNumeric: true,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption(
-                          'Seat Number', ticket.seatsInString, true, null),
+                      ItemDescription(
+                        label: 'Seat Number',
+                        value: ticket.seatsInString,
+                        isNumeric: true,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption(
-                          'Price',
-                          '${Utilities.toCurrency(price, 0, 'IDR ')} X ${ticket.seat.length}',
-                          true,
-                          null),
+                      ItemDescription(
+                        label: 'Price',
+                        value:
+                            '${Utilities.toCurrency(price, 0, 'IDR ')} X ${ticket.seat.length}',
+                        isNumeric: true,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption(
-                          'Admin',
-                          '${Utilities.toCurrency(fee, 0, 'IDR ')} X ${ticket.seat.length}',
-                          true,
-                          null),
+                      ItemDescription(
+                        label: 'Admin',
+                        value: '$fee',
+                        isNumeric: true,
+                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
-                      itemDesctiption(
-                          'Total',
-                          Utilities.toCurrency(total, 0, 'IDR '),
-                          true,
-                          blackNumberFont.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.w600)),
-                      const SizedBox(),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      ItemDescription(
+                        label: 'Total',
+                        value: Utilities.toCurrency(total, 0, 'IDR '),
+                        isNumeric: true,
+                        textValueStyle: blackNumberFont.copyWith(
+                            fontSize: 16, fontWeight: FontWeight.w600),
+                      ),
                       Container(
                           margin: const EdgeInsets.symmetric(vertical: 20),
                           child: const Divider(
                             color: grey2Color,
                             thickness: 1,
                           )),
-                      itemDesctiption(
-                          'Your Wallet',
-                          Utilities.toCurrency(user.balance, 0, 'IDR '),
-                          true,
-                          blackNumberFont.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: user.balance >= total
-                                  ? successColor
-                                  : dangerColor)),
+                      ItemDescription(
+                        label: 'Your Wallet',
+                        value: Utilities.toCurrency(user.balance, 0, 'IDR '),
+                        isNumeric: true,
+                        textValueStyle: blackNumberFont.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: user.balance >= total
+                                ? successColor
+                                : dangerColor),
+                      ),
                     ],
                   ),
                   const SizedBox(

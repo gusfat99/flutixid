@@ -59,7 +59,8 @@ class MyApp extends StatelessWidget {
                       body: WrapperOrder(),
                     ),
                 '/topup': (context) => const TopupPage(),
-                '/successfull': (context) => const SuccessfullPage()
+                '/successfull': (context) => const SuccessfullPage(),
+                '/ticket-details': (context) => const TicketDetailsPage()
               },
             );
           },

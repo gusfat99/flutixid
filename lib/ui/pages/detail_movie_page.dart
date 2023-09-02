@@ -141,7 +141,10 @@ class DetailMoviePage extends StatelessWidget {
                                                 right: index ==
                                                         (credits!.length - 1)
                                                     ? 0
-                                                    : 13.0),
+                                                    : 13.0,
+                                                left: index == 0
+                                                    ? defaultMargin
+                                                    : 0),
                                           );
                                         },
                                       )
@@ -152,7 +155,10 @@ class DetailMoviePage extends StatelessWidget {
                                             (BuildContext context, int index) {
                                           return CastCardSkeleton(
                                             margin: EdgeInsets.only(
-                                                right: index == 4 ? 0 : 13.0),
+                                                right: index == 4 ? 0 : 13.0,
+                                                left: index == 0
+                                                    ? defaultMargin
+                                                    : 0),
                                           );
                                         },
                                       ),

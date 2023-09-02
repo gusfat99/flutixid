@@ -23,8 +23,10 @@ class onSplashPage extends PageState {
 }
 
 class onMainPage extends PageState {
+  final int bottomNavBarIndex;
+  const onMainPage({this.bottomNavBarIndex = 0});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [bottomNavBarIndex];
 }
 
 class onRegisterPage extends PageState {
@@ -52,4 +54,3 @@ class onAccountConfirmPage extends PageState {
   @override
   List<Object> get props => [];
 }
-

@@ -20,7 +20,7 @@ class _TopupPageState extends State<TopupPage> {
           primary: yellowColor,
         ))));
 
-    Map? arguments = ModalRoute.of(context)?.settings.arguments as Map;
+    Map? arguments = ModalRoute.of(context)?.settings?.arguments as Map;
     Ticket? ticket = arguments['ticket'];
 
     return Scaffold(
@@ -42,6 +42,12 @@ class _TopupPageState extends State<TopupPage> {
                         alignment: Alignment.centerLeft,
                         child: GestureDetector(
                           onTap: () {
+                            if (ticket == null) {
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  "/ordering", (route) => false);
+                            }
                             // handleBack();
                           },
                           child: const Icon(

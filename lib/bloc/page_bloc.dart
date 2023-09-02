@@ -13,7 +13,9 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       } else if (event is GoToLoginPage) {
         emit(onLoginPage(event.email));
       } else if (event is GoMainPage) {
-        emit(onMainPage());
+        print("event.bottomNavBarIndex");
+        print(event.bottomNavBarIndex);
+        emit(onMainPage(bottomNavBarIndex: event.bottomNavBarIndex));
       } else if (event is GoToRegistration) {
         emit(onRegisterPage(registrationData: event.registrationData));
       } else if (event is GoToPreferencePage) {

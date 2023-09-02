@@ -18,8 +18,11 @@ class GoToLoginPage extends PageEvent {
 }
 
 class GoMainPage extends PageEvent {
+  final int bottomNavBarIndex;
+  const GoMainPage({this.bottomNavBarIndex = 0});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [bottomNavBarIndex];
 }
 
 class GoToRegistration extends PageEvent {

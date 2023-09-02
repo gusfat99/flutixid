@@ -1,14 +1,11 @@
 part of 'ticket_bloc.dart';
 
-abstract class TicketState extends Equatable {
-  const TicketState();
-}
-
-class TicketList extends TicketState {
+class TicketState extends Equatable {
   final List<Ticket> tickets;
 
-  const TicketList(this.tickets);
+  const TicketState(this.tickets);
 
   @override
   List<Object> get props => [tickets];
 }
+

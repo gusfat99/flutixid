@@ -10,7 +10,6 @@ class SuccessfullPage extends StatelessWidget {
     String typeTransaction = arguments['type_transaction'] ?? '';
     FlutixTransaction? transaction = arguments['transaction'];
 
-    print("arguments ${arguments}");
     return WillPopScope(
       onWillPop: () {
         return Future.value(false);
@@ -56,7 +55,17 @@ class SuccessfullPage extends StatelessWidget {
                             margin:
                                 const EdgeInsets.symmetric(horizontal: 55.0),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                if (typeTransaction == 'topup') {
+                                } else {
+                                  context.read<PageBloc>().add(
+                                      const GoMainPage(bottomNavBarIndex: 1));
+                                  await Navigator.of(context)
+                                      .pushNamedAndRemoveUntil(
+                                          "/", (route) => false);
+                                  // ignore: use_build_context_synchronously
+                                }
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: mainColor,
                               ),
@@ -111,7 +120,6 @@ class SuccessfullPage extends StatelessWidget {
   }
 
   Future<void> processingTicketOrder(context, transaction, ticket) async {
-   
     BlocProvider.of<UserBloc>(context).add(UserPurcash(transaction.amount));
     BlocProvider.of<TicketBloc>(context)
         .add(BuyTicket(ticket, transaction.userID));

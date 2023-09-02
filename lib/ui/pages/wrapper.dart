@@ -21,13 +21,14 @@ class _WrapperState extends State<Wrapper> {
         prevPageEvent = GoMainPage();
 
         context.read<UserBloc>().add(LoadUser(id: firebaseUser.uid));
+        context.read<TicketBloc>().add(GetTickets(firebaseUser.uid));
         context.read<PageBloc>().add(prevPageEvent!);
       }
     }
 
     return BlocBuilder<PageBloc, PageState>(builder: (context, pageState) {
       if (pageState is onMainPage) {
-        return const MainPage();
+        return MainPage(bottomNavBarIndex: pageState.bottomNavBarIndex);
       } else if (pageState is onLoginPage) {
         return SigninPage(
           email: pageState.email,

@@ -117,9 +117,10 @@ class NewMoviesPage extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               itemCount: 3,
                               itemBuilder: (_, index) {
-                                return const MovieCardPlayingSkeleton(
+                                return MovieCardPlayingSkeleton(
                                   margin: EdgeInsets.only(
-                                      right: 16.0, left: defaultMargin),
+                                      right: 16.0,
+                                      left: index == 0 ? defaultMargin : 0),
                                 );
                               });
                         }
@@ -186,6 +187,9 @@ class NewMoviesPage extends StatelessWidget {
                               itemCount:
                                   isLoaded ? movieState.movies.length : 5,
                               itemBuilder: (_, index) => MovieCardComingSoon(
+                                    margin: EdgeInsets.only(
+                                        right: 16,
+                                        left: index == 0 ? defaultMargin : 0),
                                     movie: (isLoaded
                                         ? movieState.movies[index]
                                         : null),
